@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid } from 'recharts'
 import { API_BASE_URL } from './config'
 
-const API = API_BASE_URL
+console.log("API URL:", API_BASE_URL);
 
 // ---------------- presets ----------------
 const PRESETS = {
@@ -305,7 +305,7 @@ function SandboxSection() {
         if (cities.length < 3) return
         setLoading(true); setResult(null); setDrawnCount(0)
         try {
-            const res = await fetch(`${API}/run/${algo}`, {
+            const res = await fetch(`${API_BASE_URL}/run/${algo}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ cities, ...params }),
@@ -634,11 +634,11 @@ function CompareSection({ sharedCities }) {
         setLoading(true); setResults(null)
         try {
             const responses = await Promise.all([
-                fetch(`${API}/run/as`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                fetch(`${API_BASE_URL}/run/as`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
                        body: JSON.stringify({ cities, ...params }) }),
-                fetch(`${API}/run/eas`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                fetch(`${API_BASE_URL}/run/eas`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
                        body: JSON.stringify({ cities, ...params }) }),
-                fetch(`${API}/run/asrank`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                fetch(`${API_BASE_URL}/run/asrank`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
                        body: JSON.stringify({ cities, ...params }) }),
             ])
 
@@ -989,7 +989,7 @@ function SandboxWithBridge({ onResult }) {
         if (cities.length < 3) return
         setLoading(true); setResult(null); setDrawnCount(0)
         try {
-            const res = await fetch(`${API}/run/${algo}`, {
+            const res = await fetch(`${API_BASE_URL}/run/${algo}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ cities, ...params }),

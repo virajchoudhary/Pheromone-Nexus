@@ -12,7 +12,7 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True,
 
 @app.get("/")
 def read_root():
-    return {"message": "Pheromone Nexus API is running", "status": "active"}
+    return {"status": "API running"}
 
 
 class City(BaseModel):
@@ -283,5 +283,6 @@ def health():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
+    # Render injects the PORT environment variable
+    port = int(os.environ.get("PORT", 8000)) 
     uvicorn.run(app, host="0.0.0.0", port=port)
